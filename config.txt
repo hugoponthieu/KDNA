@@ -1,6 +1,6 @@
 [servers]
-4, credentials, 25, salut
-3, credentials, 22, test
+18, credentials, 22, hello
+3, test, 25, ahahah
 2, test, 23, testt
 
 [auto-backups]
