@@ -1,6 +1,58 @@
-# POC - Faire un CRUD avec le fichier de conf
+# KDNA
 
 This is the official repository for the DO2023-2026 python CLI backup project
+
+## Init for dev
+
+After cloning the repo you will need to install all dependencies
+
+```bash
+# install deps
+poetry install
+```
+
+## Usage
+
+
+### Start the app
+```bash
+poetry run python KDNA/__init__.py
+```
+### Run the tests
+```bash
+poetry run pytest
+```
+### Run the pipeline
+```bash
+poetry run tox
+```
+```bash
+#run the pipeline with a specific env
+poetry run tox -e (env)
+```
+### Build the documentation
+```bash
+sphinx-apidoc -f -o docs/source kdna/
+sphinx-build -M html docs/source/ docs/build/
+```
+
+## Package added
+    - click             # Parseur
+    - fabric            # SSH client
+    - pycryptodome      # Encrypt tool
+    - pylint            # Linter
+    - mypy              # Type checker
+    - pytest            # Test framework
+    - tox               # Test runner
+    - tox-gh-actions    # Tox github action
+    - sphinx            # Documentation generator
+    - sphinx-rtd-theme  # Read the docs theme
+    - sphinx-autoapi    # Auto documentation generator
+    - m2r2              # Markdown to reStructuredText converter
+    - pydocstyle        # Docstring style checker
+    - chardet           # Encoding detector
+
+Vous pouvez désormais faire vos commandes dans le fichier `__init__.py`
 
 ## Documentation
 
@@ -16,10 +68,7 @@ Un fichier est créé :
 [servers]
 
 [auto-backups]
-
 ```
-
-Vous pouvez désormais faire vos commandes dans le fichier `__init__.py`
 
 ### Server
 
@@ -77,7 +126,6 @@ Server.update("test", new_port="25", new_credentials="test", new_alias="ahahah")
 
 De plus l'id du serveur n'est pas modifiable, il sera peut être généré automatiquement plus tard.
 
-
 ### Auto-Backup
 
 1. #### Création
@@ -112,43 +160,21 @@ Vous pouvez mettre à jour une auto-backup grâce à son id avec ces différents
 | Règle :     | Obligatoire | Facultatif | Facultatif | Facultatif | Facultatif |
 
 ```
-Backup.update("9", new_frequency="daily", new_timestamp="2021-01-02", new_path="/home/backup")
+Backup.update("5", new_frequency="daily", new_timestamp="2021-01-02", new_path="/home/backup")
 ```
 
 À noter que vous n'êtes pas obligé de modifier tous les champs de votre ligne concernant l'auto-backup que vous voulez modifier. Vous pouvez par exemple seulement changer le nom en précisant `new_name` en plus de l'`id` obligatoire dans la signature de votre update.
 
 De plus l'id relié au serveur n'est pas modifiable, car la back-up est lié à celui-ci
 
-
 ### ConfigUtils
 
 1. #### Readall
 
-Vous pouvez faire la commande suivante pour vous afficher le contenu du fichier  `config.txt` simplement :
+Vous pouvez faire la commande suivante pour vous afficher le contenu du fichier `config.txt` simplement :
 
 ```
 ConfUtils.readAll()
-
-### Start the app
-```bash
-poetry run python KDNA/__init__.py
-```
-### Run the tests
-```bash
-poetry run pytest
-```
-### Run the pipeline
-```bash
-poetry run tox
-```
-```bash
-#run the pipeline with a specific env
-poetry run tox -e (env)
-```
-### Build the documentation
-```bash
-sphinx-apidoc -f -o docs/source kdna/
-sphinx-build -M html docs/source/ docs/build/
 ```
 
 Cette méthode n'est pas poussée car un POC est destiné à la lecture d'un fichier de conf (cf. POC 2)
@@ -159,19 +185,3 @@ Cette méthode n'est pas poussée car un POC est destiné à la lecture d'un fic
 -   revoir les timestamp des auto-backups
 -   revoir les frequency des auto-backups
 -   optimiser au maximum le code
-
-## Package added
-    - click             # Parseur
-    - fabric            # SSH client
-    - pycryptodome      # Encrypt tool
-    - pylint            # Linter
-    - mypy              # Type checker
-    - pytest            # Test framework
-    - tox               # Test runner
-    - tox-gh-actions    # Tox github action
-    - sphinx            # Documentation generator
-    - sphinx-rtd-theme  # Read the docs theme
-    - sphinx-autoapi    # Auto documentation generator
-    - m2r2              # Markdown to reStructuredText converter
-    - pydocstyle        # Docstring style checker
-    - chardet           # Encoding detector

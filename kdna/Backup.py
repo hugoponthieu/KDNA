@@ -1,3 +1,5 @@
+"""Backup"""
+
 from ConfUtils import ConfUtils
 
 
@@ -17,40 +19,45 @@ class Backup:
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
 
         # On cherche les indices de [servers] et [auto-backups]
-        # Belek à la complexité algorithmique sur ces deux lignes -> O(2n) alors que techniquement on pourrait faire O(n)
         index_servers = ConfUtils.find_servers_index(lines)
         index_auto_backups = ConfUtils.find_auto_backups_index(lines)
 
         # Vérification de l'existence de l'id_server dans la section [servers]
         if not self.check_id_server(lines, index_servers, index_auto_backups):
             print(
-                f"Erreur : L'id du serveur \"{self.id_server}\" de votre auto backup n'existe pas dans la section [servers].")
+                f"Erreur : L'id du serveur \"{self.id_server}\" de votre auto backup n'existe "
+                f"pas dans la section ["
+                f"servers].")
             return
 
         # Construction de la nouvelle ligne
-        new_line = f"{self.id_backup}, {self.frequency}, {self.name}, {self.timestamp}, {self.id_server}, {self.path}\n"
+        new_line = (f"{self.id_backup}, {self.frequency}, {self.name}, {self.timestamp}, "
+                    f"{self.id_server}, {self.path}\n")
 
         # Ajout de la ligne seulement si l'id_backup est unique
         existing_backups = self.extract_existing_backups(
             lines, index_auto_backups)
         if str(self.id_backup) in existing_backups:
             print(
-                f"Erreur : L'id de l'auto backup \"{self.id_backup}\" existe déjà dans la section [auto-backups].")
+                f"Erreur : L'id de l'auto backup \"{self.id_backup}\" existe déjà dans la "
+                f"section [auto-backups].")
             return
 
         # Ajout de la ligne
         print(
-            f"L'auto backup avec l'id \"{self.id_backup}\" a été ajouté dans la section [auto-backups].")
+            f"L'auto backup avec l'id \"{self.id_backup}\" a été ajouté dans la section ["
+            f"auto-backups].")
         lines.insert(index_auto_backups + 1, new_line)
 
         # Écrire les lignes mises à jour dans le fichier
-        with open(ConfUtils.config_file, 'w') as f:
+        with open(ConfUtils.config_file, 'w', encoding="utf-8") as f:
             f.writelines(lines)
 
     def check_id_server(self, lines, index_servers, index_auto_backups):
         # Fonction pour vérifier l'existence de l'id_server dans la section [servers]
-        existing_servers = [line.split(',')[0].strip() for line in lines[index_servers + 1:index_auto_backups] if
-                            len(line.split(',')) >= 4 and line.strip()]
+        existing_servers = \
+            [line.split(',')[0].strip() for line in lines[index_servers + 1:index_auto_backups] if
+             len(line.split(',')) >= 4 and line.strip()]
         return str(self.id_server) in existing_servers
 
     @staticmethod
@@ -80,11 +87,13 @@ class Backup:
             ConfUtils.delete_line(lines, line_to_delete)
             ConfUtils.write_file_lines(ConfUtils.config_file, lines)
             print(
-                f"L'auto backup avec l'id \"{id_to_delete}\" a été supprimé de la section [auto-backups].")
+                f"L'auto backup avec l'id \"{id_to_delete}\" a été supprimé de la section ["
+                f"auto-backups].")
         # Sinon on affiche un message d'erreur
         else:
             print(
-                f"Erreur : Aucun élément trouvé avec l'id \"{id_to_delete}\" dans la section [auto-backups].")
+                f"Erreur : Aucun élément trouvé avec l'id \"{id_to_delete}\" dans la section ["
+                f"auto-backups].")
 
     @staticmethod
     def find_line_to_delete(lines, index_auto_backups, id_to_delete):
@@ -128,7 +137,8 @@ class Backup:
                 new_path = new_path if new_path is not None else existing_path
 
                 # Construire la nouvelle ligne mise à jour
-                updated_line = f"{existing_id_backup}, {new_frequency}, {new_name}, {new_timestamp}, {existing_id_server}, {new_path}\n"
+                updated_line = (f"{existing_id_backup}, {new_frequency}, {new_name}, "
+                                f"{new_timestamp}, {existing_id_server}, {new_path}\n")
 
                 # Mettre à jour la ligne
                 lines[line_to_update] = updated_line
@@ -138,11 +148,13 @@ class Backup:
                     f.writelines(lines)
 
                 print(
-                    f"L'auto backup avec l'id \"{id_to_update}\" a été mis à jour dans la section [auto-backups].")
+                    f"L'auto backup avec l'id \"{id_to_update}\" a été mis à jour dans la "
+                    f"section [auto-backups].")
             # Sinon, afficher un message d'erreur
             else:
                 print(
-                    f"Erreur : Aucun élément trouvé avec l'id \"{id_to_update}\" dans la section [auto-backups].")
+                    f"Erreur : Aucun élément trouvé avec l'id \"{id_to_update}\" dans la section "
+                    f"[auto-backups].")
         else:
             print(
                 "Erreur : Section [auto-backups] non trouvée dans le fichier.")

@@ -1,13 +1,20 @@
+"""ConfUtils    """
+
+
+CONFIG_TXT = 'config.txt'
+
+
 class ConfUtils:
     # Fonctions utilitaires pour les fichiers de configuration
     config_file = 'config.txt'
 
+    @staticmethod
     def initialize_config_file():
         config_content = "[servers]\n\n[auto-backups]\n"
 
         # On vérifie si le fichier existe déjà
         try:
-            with open('config.txt', 'r') as f:
+            with open(CONFIG_TXT, 'r') as f:
                 content = f.read()
                 # Si le fichier existe déjà et qu'il est correctement initialisé, on ne fait rien
                 if "[servers]" in content and "[auto-backups]" in content:
@@ -17,14 +24,15 @@ class ConfUtils:
             print("Le fichier n'existe pas encore, nous allons le créer...")
             pass
 
-        # On initialise le contenu du fichier de configuration si le fichier n'existe pas ou s'il n'est pas correctement initialisé
-        with open('config.txt', 'w') as f:
+        # On initialise le contenu du fichier de configuration si le fichier n'existe pas ou
+        # s'il n'est pas correctement initialisé
+        with open(CONFIG_TXT, 'w') as f:
             f.write(config_content)
 
         print("Le fichier de configuration a été initialisé avec succès.")
 
     @staticmethod
-    def readAll():
+    def read_all():
         # Fonction pour afficher le fichier de configuration
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
         for line in lines:
@@ -43,10 +51,7 @@ class ConfUtils:
             f.writelines(lines)
 
     @staticmethod
-    def find_section(lines: list, pattern: str) -> int or None:
-        """
-        Fonction pour trouver l'indice d'une section
-        """
+    def find_section(lines: list, pattern: str):
         for i, line in enumerate(lines):
             if pattern in line:
                 return i
