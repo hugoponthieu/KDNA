@@ -20,6 +20,7 @@ sphinx-autoapi = "^3.0.0"
 m2r2 = "^0.3.3.post2"
 pydocstyle = "^6.3.0"
 tox = "^4.11.4"
+pyzipper = "^0.3.6"
 
 
 [tool.poetry.group.dev.dependencies]

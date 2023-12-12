@@ -1,10 +1,10 @@
-"""Main entry point for kdna"""""
+from encrypt.encrypt import encrypt_archive, decrypt_archive
 
 
 def main():
-    """Main entry point for kdna"""""
-    print("Hello DO")
+    encrypt_archive('data/secret.txt')
+    decrypt_archive('data/secret.txt')
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
