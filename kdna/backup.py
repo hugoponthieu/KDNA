@@ -1,5 +1,5 @@
 """Backup"""
-from kdna.conf_utils import ConfUtils
+from conf_utils import ConfUtils
 
 
 class Backup:

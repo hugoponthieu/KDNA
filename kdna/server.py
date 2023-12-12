@@ -1,6 +1,6 @@
 """Server"""
 
-from kdna.conf_utils import ConfUtils
+from conf_utils import ConfUtils
 
 
 class Server:
