@@ -1,9 +1,10 @@
-from encrypt.encrypt import encrypt_archive, decrypt_archive
+from encrypt import encrypt
 
 
 def main():
-    encrypt_archive('data/secret.txt')
-    decrypt_archive('data/secret.txt')
+    encrypt.load_key()
+    encrypt.cyper()
+    encrypt.decypher()
 
 
 if __name__ == "__main__":
