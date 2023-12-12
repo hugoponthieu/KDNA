@@ -17,9 +17,13 @@ load_dotenv()
 host = os.getenv('HOST')
 
 # Lancer une commande à distance et récupérer son résultat :
-result = Connection(host).run('tree', hide=True)
-msg = "\n{0.stdout}"
-print(msg.format(result))
+try :
+    result = Connection(host).run('tree', hide=True)
+    msg = "\n{0.stdout}"
+    print(msg.format(result))
+except:
+    print("An error as occured while connecting to the host and retrieving informations")
+
 
 # Lancer une commande sans s'intéresser à son résutlat :
 #with Connection('melomys') as c:
@@ -65,9 +69,13 @@ def print_projects():
 
     Arguments: none
     """
-    result = Connection(host).run('ls -dl */', hide=True)
-    msg = "\n{0.stdout}"
-    print(msg.format(result))
+    try:
+        result = Connection(host).run('ls -dl */', hide=True)
+        msg = "\n{0.stdout}"
+        print(msg.format(result))
+    except:
+        print("An error as occured")
+        return None
 
 print("---------------Projets-----------------")
 print_projects()
