@@ -2,7 +2,7 @@
 name = "kdna"
 version = "0.1.0"
 description = ""
-authors = ["D3 2023-2026 <polytech-do3@etu.umontpellier.fr>"]
+authors = ["DO3 2023-2026 <polytech-do3@etu.umontpellier.fr>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
