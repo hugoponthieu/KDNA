@@ -4,26 +4,18 @@ kdna package
 Submodules
 ----------
 
-kdna.Backup module
+kdna.backup module
 ------------------
 
-.. automodule:: kdna.Backup
+.. automodule:: kdna.backup
    :members:
    :undoc-members:
    :show-inheritance:
 
-kdna.ConfUtils module
----------------------
+kdna.conf\_utils module
+-----------------------
 
-.. automodule:: kdna.ConfUtils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-kdna.Server module
-------------------
-
-.. automodule:: kdna.Server
+.. automodule:: kdna.conf_utils
    :members:
    :undoc-members:
    :show-inheritance:
@@ -32,6 +24,14 @@ kdna.main module
 ----------------
 
 .. automodule:: kdna.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kdna.server module
+------------------
+
+.. automodule:: kdna.server
    :members:
    :undoc-members:
    :show-inheritance:

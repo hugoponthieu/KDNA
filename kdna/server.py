@@ -1,9 +1,10 @@
 """Server"""
 
-from ConfUtils import ConfUtils
+from kdna.conf_utils import ConfUtils
 
 
 class Server:
+    """Class representing a server"""
     def __init__(self, id_server, credentials, port, alias):
         self.id_server = id_server
         self.credentials = credentials
@@ -12,7 +13,7 @@ class Server:
 
     # Ajout d'un serveur dans le fichier de configuration
     def add(self):
-
+        """Add a new server"""
         # On ouvre le fichier en mode lecture
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
 
@@ -46,7 +47,7 @@ class Server:
             lines.insert(index_servers + 1, new_line)
 
             # Écrire les lignes mises à jour dans le fichier
-            with open(ConfUtils.config_file, 'w') as f:
+            with open(ConfUtils.config_file, 'w', encoding="utf-8") as f:
                 f.writelines(lines)
             confirmation_message = f"Le serveur avec l'id \"{self.id_server}\""
             if self.alias is not None:
@@ -60,6 +61,7 @@ class Server:
     # Suppression d'un serveur dans le fichier de configuration
     @staticmethod
     def delete(id_or_alias, by_alias=False):
+        """Delete a specific server"""
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
         index_servers = ConfUtils.find_servers_index(lines)
         element_type = 'alias' if by_alias else 'id'
@@ -96,19 +98,19 @@ class Server:
 
     @staticmethod
     def extract_existing_servers(lines, index_servers, index_auto_backups):
-        # Fonction pour extraire les id_server dans la section [servers]
+        """Extract the id of th server"""
         return [line.split(',')[0].strip() for line in lines[index_servers + 1:index_auto_backups]
                 if len(line.split(',')) >= 4 and line.strip()]
 
     @staticmethod
     def extract_existing_aliases(lines, index_servers, index_auto_backups):
-        # Fonction pour extraire les aliases dans la section [servers]
+        """Extract the aliases in the server section"""
         return [line.split(',')[3].strip() if len(line.split(',')) >= 4 else None for line in
                 lines[index_servers + 1:index_auto_backups] if line.strip()]
 
     @staticmethod
     def find_line_to_delete(lines, index_servers, id_or_alias, by_alias=False):
-        # Fonction pour trouver la ligne à supprimer
+        """Find the line to delete"""
         index_auto_backups = ConfUtils.find_auto_backups_index(lines)
         if index_auto_backups is None:
             index_auto_backups = len(lines)
@@ -129,6 +131,7 @@ class Server:
 
     @staticmethod
     def update(alias_to_update, new_credentials=None, new_port=None, new_alias=None):
+        """Update a specific server"""
         # On ouvre le fichier en mode lecture
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
 
@@ -167,7 +170,7 @@ class Server:
                 lines[line_to_update] = updated_line
 
                 # Écrire les lignes mises à jour dans le fichier
-                with open(ConfUtils.config_file, 'w') as f:
+                with open(ConfUtils.config_file, 'w', encoding="utf-8") as f:
                     f.writelines(lines)
 
                 print(f"Les informations du serveur avec l'alias \"{alias_to_update}\" ont été "
@@ -182,7 +185,7 @@ class Server:
 
     @staticmethod
     def find_line_to_update(lines, index_servers, alias_to_update):
-        # Fonction pour trouver la ligne à mettre à jour
+        """Find the line to update"""
         index_auto_backups = ConfUtils.find_auto_backups_index(lines)
         if index_auto_backups is None:
             index_auto_backups = len(lines)

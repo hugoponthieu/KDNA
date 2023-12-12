@@ -1,9 +1,9 @@
 """Backup"""
-
-from ConfUtils import ConfUtils
+from kdna.conf_utils import ConfUtils
 
 
 class Backup:
+    """Class representing a backup"""
     def __init__(self, id_backup, frequency, name, timestamp, id_server, path):
         self.id_backup = id_backup
         self.frequency = frequency
@@ -14,7 +14,7 @@ class Backup:
 
     # Ajout d'une auto backup dans le fichier de configuration
     def add(self):
-
+        """Add a new backup"""
         # On ouvre le fichier en mode lecture
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
 
@@ -54,6 +54,7 @@ class Backup:
             f.writelines(lines)
 
     def check_id_server(self, lines, index_servers, index_auto_backups):
+        """Check the id of a specific server"""
         # Fonction pour vérifier l'existence de l'id_server dans la section [servers]
         existing_servers = \
             [line.split(',')[0].strip() for line in lines[index_servers + 1:index_auto_backups] if
@@ -62,6 +63,7 @@ class Backup:
 
     @staticmethod
     def extract_existing_backups(lines, index_auto_backups):
+        """Extract an existing backup"""
         # Fonction pour extraire les id_backup dans la section [auto-backups]
         return [line.split(',')[0].strip() for line in lines[index_auto_backups + 1:] if
                 len(line.split(',')) >= 6 and line.strip()]
@@ -69,6 +71,7 @@ class Backup:
     # Suppression d'une auto backup dans le fichier de configuration
     @staticmethod
     def delete(id_to_delete):
+        """Delete a backup"""
         # On ouvre le fichier en mode lecture
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
 
@@ -97,7 +100,7 @@ class Backup:
 
     @staticmethod
     def find_line_to_delete(lines, index_auto_backups, id_to_delete):
-        # Fonction pour trouver la ligne à supprimer
+        """Function to find the line to delete"""
         for i, line in enumerate(lines[index_auto_backups + 1:]):
             if len(line.split(',')) >= 6 and line.strip():
                 if line.split(',')[0].strip() == str(id_to_delete):
@@ -106,6 +109,7 @@ class Backup:
 
     @staticmethod
     def update(id_to_update, new_frequency=None, new_name=None, new_timestamp=None, new_path=None):
+        """update a specific backup"""
         # On ouvre le fichier en mode lecture
         lines = ConfUtils.read_file_lines(ConfUtils.config_file)
 
@@ -144,7 +148,7 @@ class Backup:
                 lines[line_to_update] = updated_line
 
                 # Écrire les lignes mises à jour dans le fichier
-                with open(ConfUtils.config_file, 'w') as f:
+                with open(ConfUtils.config_file, 'w', encoding="utf-8") as f:
                     f.writelines(lines)
 
                 print(
@@ -161,6 +165,7 @@ class Backup:
 
     @staticmethod
     def find_line_to_update(lines, index_auto_backups, id_to_update):
+        """find the line to update"""
         # Fonction pour trouver la ligne à mettre à jour
         auto_backups_lines = lines[index_auto_backups + 1:]
 

@@ -1,8 +1,8 @@
 """Main entry point for kdna"""
 
-from Backup import Backup
-from Server import Server
-from ConfUtils import ConfUtils
+#from kdna.backup import Backup
+#from kdna.server import Server
+#from kdna.conf_utils import ConfUtils
 
 
 def main():
