@@ -35,7 +35,7 @@ except:
 #	c.put('file_sent_by_fabric.txt',remote='tmp/')
 # la connexion est automatiquement fermée avec cette syntaxe du "with"
 
-def print_tag_from_project(project):
+def print_tag_from_project(project: str):
     """
     Print tous les tags lié au projet.
 
@@ -49,7 +49,7 @@ def print_tag_from_project(project):
         print("An error as occured")
         return None
 
-def print_tag_content(project, tag):
+def print_tag_content(project: str, tag: str):
     """
     Print le contenu d'un tag d'un projet.
 
