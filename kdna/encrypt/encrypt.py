@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+import os
 
 
 def generate_key():
@@ -15,25 +16,44 @@ def load_key():
     return key
 
 
-def cyper() -> bytes:
+def cypher(path: str, out: str) -> bytes:
+    """
+    :param path: path to file to encrypt
+    :param out: path to output file
+    """
     key = load_key()
     fer = Fernet(key)
-    with open("test.txt", "rb") as f:
+    with open(path, "rb") as f:
         data = f.read()
 
     encrypted = fer.encrypt(data)
     print(encrypted)
-    with open("test_cypher.txt", "w") as f:
+    with open(out, "w") as f:
         f.write(encrypted.decode())
     return encrypted
 
 
-def decypher():
+def cypher_folder(path: str, out: str):
+    print(os.listdir(path))
+    for file in os.listdir(path):
+        cypher(path + "/" + file, out + "/" + file)
+
+
+def decypher_folder(path: str, out: str):
+    print(os.listdir(path))
+    for file in os.listdir(path):
+        decypher(path + "/" + file, out + "/" + file)
+
+
+def decypher(path: str, out: str):
+    """
+    :param path: path to file to decrypt
+    :param out: path to output file
+    """
     key = load_key()
     fer = Fernet(key)
-    with open("test_cypher.txt", "r") as f:
+    with open(path, "r") as f:
         data = f.read()
     decrypted = fer.decrypt(data.encode())
-    print(decrypted)
-    with open("test_decypher.txt", "wb") as f:
+    with open(out, "wb") as f:
         f.write(decrypted)

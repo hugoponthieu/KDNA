@@ -2,9 +2,8 @@ from encrypt import encrypt
 
 
 def main():
-    encrypt.load_key()
-    encrypt.cyper()
-    encrypt.decypher()
+    encrypt.cypher_folder("./data", "./out")
+    encrypt.decypher_folder("./out", "./out_cypher")
 
 
 if __name__ == "__main__":

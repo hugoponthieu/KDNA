@@ -6,3 +6,6 @@ run:
 clear:
 	rm -Rf ./data/*
 	echo "a very secret secret" > ./data/secret.txt
+
+test:
+	poetry run pytest tests/main.py

@@ -11,6 +11,7 @@ click = "^8.1.7"
 fabric = "^3.2.2"
 pycryptodome = "^3.19.0"
 pyzipper = "^0.3.6"
+pytest = "^7.4.3"
 
 
 [build-system]
