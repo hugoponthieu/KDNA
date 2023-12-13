@@ -53,6 +53,6 @@ sphinx-build -M html docs/source/ docs/build/
     - chardet           # Encoding detector
 
 ### Contributeur :
-    - Dorian Grasset : mise en place du système de sécurité concernant le CRUD des serveurs & backups (100%)
-    - Benoit Planche : mise en place du CRUD (https://github.com/somoslosdorados/KDNA/tree/POC-5-BPL)
-    - Mathias Durat & Tristan Radulescu : relecteur
+    - Dorian Grasset : mise en place du système de sécurité concernant le CRUD des serveurs & backups (https://github.com/somoslosdorados/KDNA/tree/POC-5-DGR)
+    - Benoit Planche : mise en place du CRUD (100%)
+    - Tristan Radulescu : relecteur
