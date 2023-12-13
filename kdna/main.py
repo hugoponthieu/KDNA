@@ -16,22 +16,22 @@ def display(path):
 
 @click.group()
 def kdna():
-    """kdna : Commande principale"""
+    """kdna : Outil de gestion de sauvegardes"""
 
 
 @kdna.group()
 def backup():
-    """backup: Commande pour sauvegarder un fichier"""
+    """Commande pour sauvegarder un fichier"""
 
 
 @kdna.group()
 def server():
-    """server: Commande pour lancer le serveur"""
+    """Commande pour lancer le serveur"""
 
 
 @kdna.group()
 def autobackup():
-    """backup: Commande pour mettre en place un daemon de sauvegarde"""
+    """Commande pour mettre en place un daemon de sauvegarde"""
 
 
 @backup.command()
@@ -50,7 +50,7 @@ def add(namepath):
 @click.argument('name')
 def set(name):
     """set: Commande pour sélectionner un serveur
-        --name: option pour entrer le nom du serveur"""
+        name: argument pour entrer le nom du serveur"""
     click.echo(f"Picked server : \"{name}\"")
 
 
@@ -64,8 +64,8 @@ def schedule(nameofcron, tag, cron_schedule, custom_cron):
     """schedule: Commande pour prévoir une backup régulière
         --nameofcron: option pour entrer le nom du cron
         --tag: option pour saisir un tag pour le cron
-        --schedule: option pour choisir le schedule du cron
-        --custom-cron: option pour entrer un cron personnalisé"""
+        cron_schedule: argument pour choisir le schedule du cron
+        custom_cron: argument pour entrer un cron personnalisé"""
     click.echo(f"Name of cron : \"{nameofcron}\"")
     click.echo(f"Cron tag and schedule : \"{tag}\" \"{cron_schedule}\"")
     if cron_schedule == 'custom':
