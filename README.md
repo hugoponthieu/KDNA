@@ -51,3 +51,7 @@ sphinx-build -M html docs/source/ docs/build/
     - m2r2              # Markdown to reStructuredText converter
     - pydocstyle        # Docstring style checker
     - chardet           # Encoding detector
+
+### Contribution 
+    - Benoit Planche : Créer un exécutable hello world lançable avec la commande kdna (100%)
+    - Tristan Radulescu : relecteur
