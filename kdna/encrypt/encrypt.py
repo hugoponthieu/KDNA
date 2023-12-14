@@ -33,6 +33,29 @@ def cypher(path: str, out: str) -> bytes:
     return encrypted
 
 
+def walk_path(path: str):
+    """
+        Description: this function walks through the subdirectories from the given path and outputs a list of paths to every subdirectory (including the given path), every subdirectories and every files with full paths.
+        Inputs:
+            path: string
+        Outputs:
+            full_filenames : list ; a list of strings, full paths (from the given path) to each file in every subdirectory (including the directory from the given path).
+    """
+    dirpath, dirnames, filenames = [], [], []
+    for triplet in os.walk(path):
+        dirpath.append(triplet[0])
+        dirnames.append(triplet[1])
+        filenames.append(triplet[2])
+    
+    full_filenames = list()
+    for i in range(len(dirpath)):
+        for j in range(len(filenames[i])):
+            full_filenames.append(os.path.join(dirpath[i], filenames[i][j]))
+    
+    return full_filenames
+
+
+
 def cypher_folder(path: str, out: str):
     print(os.listdir(path))
     for file in os.listdir(path):
