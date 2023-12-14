@@ -33,9 +33,9 @@ def cypher(path: str, out: str) -> bytes:
     return encrypted
 
 
-def walk_path(path: str):
+def walk_files(path: str):
     """
-        Description: this function walks through the subdirectories from the given path and outputs a list of paths to every subdirectory (including the given path), every subdirectories and every files with full paths.
+        Description: this function walks through the subdirectories from the given path and outputs a list of paths to each file in every subdirectory (from the given path argument to each file). The given directory is included.
         Inputs:
             path: string
         Outputs:
