@@ -35,11 +35,13 @@ def cypher(path: str, out: str) -> bytes:
 
 def walk_files(path: str):
     """
-        Description: this function walks through the subdirectories from the given path and outputs a list of paths to each file in every subdirectory (from the given path argument to each file). The given directory is included.
-        Inputs:
-            path: string
-        Outputs:
-            full_filenames : list ; a list of strings, full paths (from the given path) to each file in every subdirectory (including the directory from the given path).
+    This function walks through the subdirectories from the given path and outputs a list of paths to each file in every subdirectory (from the given path argument to each file). The given directory is included.
+    
+    :param path: path to directory to be walked through.
+    :type path: str
+    
+    :return: full_filenames, a list of paths to each file in every subdirectory (including the given path argument). Each path string starts relative to the given path argument.
+    :rtype: list
     """
     dirpath, dirnames, filenames = [], [], []
     for triplet in os.walk(path):
@@ -53,7 +55,6 @@ def walk_files(path: str):
             full_filenames.append(os.path.join(dirpath[i], filenames[i][j]))
     
     return full_filenames
-
 
 
 def cypher_folder(path: str, out: str):
