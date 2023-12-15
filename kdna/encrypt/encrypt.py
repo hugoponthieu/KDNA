@@ -1,5 +1,15 @@
-from cryptography.fernet import Fernet
+"""
+This module contains encryption functions.
+
+:author: RADULESCU Tristan-Mihai, TCHILINGUIRIAN Théo
+:email: <placeholder>, theo.tchlx@gmail.com
+:date: 2023-12-15
+"""
+
+
 import os
+from cryptography.fernet import Fernet
+from auxtools import auxtools
 
 
 def generate_key():
@@ -23,38 +33,14 @@ def cypher(path: str, out: str) -> bytes:
     """
     key = load_key()
     fer = Fernet(key)
-    with open(path, "rb") as f:
-        data = f.read()
+    with open(path, "rb") as f_in, open(out, "w") as f_out:
+        data = f_in.read()
 
-    encrypted = fer.encrypt(data)
-    print(encrypted)
-    with open(out, "w") as f:
-        f.write(encrypted.decode())
+        encrypted = fer.encrypt(data)
+        print(encrypted)
+        
+        f_out.write(encrypted.decode())
     return encrypted
-
-
-def walk_files(path: str):
-    """
-    This function walks through the subdirectories from the given path and outputs a list of paths to each file in every subdirectory (from the given path argument to each file). The given directory is included.
-    
-    :param path: path to directory to be walked through.
-    :type path: str
-    
-    :return: full_filenames, a list of paths to each file in every subdirectory (including the given path argument). Each path string starts relative to the given path argument.
-    :rtype: list
-    """
-    dirpath, dirnames, filenames = [], [], []
-    for triplet in os.walk(path):
-        dirpath.append(triplet[0])
-        dirnames.append(triplet[1])
-        filenames.append(triplet[2])
-    
-    full_filenames = list()
-    for i in range(len(dirpath)):
-        for j in range(len(filenames[i])):
-            full_filenames.append(os.path.join(dirpath[i], filenames[i][j]))
-    
-    return full_filenames
 
 
 def cypher_folder(path: str, out: str):
@@ -76,8 +62,7 @@ def decypher(path: str, out: str):
     """
     key = load_key()
     fer = Fernet(key)
-    with open(path, "r") as f:
-        data = f.read()
-    decrypted = fer.decrypt(data.encode())
-    with open(out, "wb") as f:
-        f.write(decrypted)
+    with open(path, "r") as f_in, open(out, "wb") as f_out:
+        data = f_in.read()
+        decrypted = fer.decrypt(data.encode())
+        f_out.write(decrypted)
