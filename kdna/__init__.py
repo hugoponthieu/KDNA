@@ -1,4 +1,4 @@
-from parser import *
+from kdna.parsing.parser import parseConfig
 def main():
     parseConfig()
 
