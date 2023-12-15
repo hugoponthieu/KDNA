@@ -1,3 +1,7 @@
+Dorian Tetu 60% rédaction du code et création du module et Hugo Ponthieu 40% rédaction du code
+
+
+
 # KDNA
 
 This is the official repository for the DO2023-2026 python CLI backup project
